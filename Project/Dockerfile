@@ -1,11 +1,12 @@
-FROM ubuntu:latest AS build
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+# Estágio de build
+FROM gradle:8.3-jdk17 AS build
+WORKDIR /app
 COPY . .
-RUN ./gradlew bootJar --no-daemon 
+RUN ./gradlew bootJar --no-daemon
 
+# Estágio final
 FROM openjdk:17-jdk-slim
+WORKDIR /app
 EXPOSE 8080
-COPY --from-build /build/libs/demo-1.jar app.jar
-
+COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
