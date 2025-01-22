@@ -6,8 +6,7 @@ plugins {
 }
 
 group = "com.project.helloworld"
-/*version = "0.0.1-SNAPSHOT"*/
-version = "1"
+version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
