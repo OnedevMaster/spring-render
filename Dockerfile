@@ -2,7 +2,7 @@
 FROM gradle:8.3-jdk17 AS build
 WORKDIR /app
 COPY . .
-RUN ./gradlew bootJar --no-daemon
+RUN chmod +x ./gradlew && ./gradlew bootJar --no-daemon
 
 # Estágio final
 FROM openjdk:17-jdk-slim
